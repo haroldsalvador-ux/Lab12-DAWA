@@ -1,0 +1,357 @@
+{
+  "info": {
+    "name": "Lab12 - Biblioteca API (v2)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. GET Todos los autores",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/authors",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "authors"
+          ],
+          "protocol": "http",
+          "port": "3000"
+        }
+      }
+    },
+    {
+      "name": "2. POST Crear autor",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/authors",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "authors"
+          ],
+          "protocol": "http",
+          "port": "3000"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Gabriel García Márquez\",\n  \"email\": \"gabo@example.com\",\n  \"nationality\": \"Colombia\",\n  \"birthYear\": 1927,\n  \"bio\": \"Premio Nobel de Literatura 1982\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const res = pm.response.json();",
+              "if (res.id) pm.collectionVariables.set('authorId', res.id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. GET Autor por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/authors/{{authorId}}",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "authors",
+            "{{authorId}}"
+          ],
+          "protocol": "http",
+          "port": "3000"
+        }
+      }
+    },
+    {
+      "name": "4. GET Libros de un autor",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/authors/{{authorId}}/books",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "authors",
+            "{{authorId}}",
+            "books"
+          ],
+          "protocol": "http",
+          "port": "3000"
+        }
+      }
+    },
+    {
+      "name": "5. PUT Actualizar autor",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/authors/{{authorId}}",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "authors",
+            "{{authorId}}"
+          ],
+          "protocol": "http",
+          "port": "3000"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Gabriel García Márquez\",\n  \"bio\": \"Autor de Cien años de soledad\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "6. GET Todos los libros",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/books",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "books"
+          ],
+          "protocol": "http",
+          "port": "3000"
+        }
+      }
+    },
+    {
+      "name": "7. GET Libros filtrados por género",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/books?genre=Novela",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "books"
+          ],
+          "query": [
+            {
+              "key": "genre",
+              "value": "Novela"
+            }
+          ],
+          "protocol": "http",
+          "port": "3000"
+        }
+      }
+    },
+    {
+      "name": "8. POST Crear libro",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/books",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "books"
+          ],
+          "protocol": "http",
+          "port": "3000"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Cien años de soledad\",\n  \"description\": \"Obra maestra del realismo mágico\",\n  \"isbn\": \"978-0307474728\",\n  \"publishedYear\": 1967,\n  \"genre\": \"Novela\",\n  \"pages\": 417,\n  \"authorId\": \"{{authorId}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const res = pm.response.json();",
+              "if (res.id) pm.collectionVariables.set('bookId', res.id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "9. GET Libro por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/books/{{bookId}}",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "books",
+            "{{bookId}}"
+          ],
+          "protocol": "http",
+          "port": "3000"
+        }
+      }
+    },
+    {
+      "name": "10. DELETE Eliminar libro",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/books/{{bookId}}",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "books",
+            "{{bookId}}"
+          ],
+          "protocol": "http",
+          "port": "3000"
+        }
+      }
+    },
+    {
+      "name": "Tarea 1. GET Búsqueda de libros con paginación",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/api/books/search?search=amor&genre=Novela&page=1&limit=10&sortBy=publishedYear&order=desc",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "books",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "search",
+              "value": "amor"
+            },
+            {
+              "key": "genre",
+              "value": "Novela"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            },
+            {
+              "key": "sortBy",
+              "value": "publishedYear"
+            },
+            {
+              "key": "order",
+              "value": "desc"
+            }
+          ],
+          "protocol": "http",
+          "port": "3001"
+        }
+      }
+    },
+    {
+      "name": "Tarea 2. GET Estadísticas de autor",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/api/authors/{{statsAuthorId}}/stats",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "authors",
+            "{{statsAuthorId}}",
+            "stats"
+          ],
+          "protocol": "http",
+          "port": "3001"
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "authorId",
+      "value": ""
+    },
+    {
+      "key": "bookId",
+      "value": ""
+    },
+    {
+      "key": "statsAuthorId",
+      "value": "cmw6ntkmy0000y2swgxp25tnn"
+    }
+  ]
+}
