@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { prettyJson } from '@/lib/json'
 
 // GET - Estadísticas completas de un autor
 export async function GET(
@@ -43,7 +44,7 @@ export async function GET(
 
     const genres = [...new Set(books.map((b) => b.genre).filter((g): g is string => !!g))]
 
-    return NextResponse.json({
+    return prettyJson({
       authorId: author.id,
       authorName: author.name,
       totalBooks: books.length,

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
+import { prettyJson } from '@/lib/json'
 
 const SORT_FIELDS = ['title', 'publishedYear', 'createdAt'] as const
 type SortField = (typeof SORT_FIELDS)[number]
@@ -59,7 +60,7 @@ export async function GET(request: Request) {
 
     const totalPages = Math.ceil(total / limit)
 
-    return NextResponse.json({
+    return prettyJson({
       data: books,
       pagination: {
         page,
